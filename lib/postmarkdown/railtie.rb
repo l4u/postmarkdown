@@ -3,7 +3,7 @@ module Postmarkdown
     initializer :before_initialize do
       unless Rails.application.config.respond_to?(:assets) && Rails.application.config.assets.enabled
         require 'rack'
-        Rails.configuration.middleware.insert_before('Rack::Sendfile', 'Rack::Static',
+        Rails.configuration.middleware.insert_before('Rack::Runtime', 'Rack::Static',
           :urls => ['/stylesheets/postmarkdown'],
           :root => "#{postmarkdown_root}/vendor/assets"
         )
